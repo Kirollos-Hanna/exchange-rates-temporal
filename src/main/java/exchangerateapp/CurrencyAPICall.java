@@ -7,8 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 @ActivityInterface
-public interface ExchangeCurrency {
-
+public interface CurrencyAPICall {
     @ActivityMethod
-    String showConversions(JSONObject currencies);
+    JSONObject GetCurrencyConversions() throws UnirestException, ParseException;
 }

@@ -1,13 +1,19 @@
 package exchangerateapp;
 
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class ExchangeCurrencyImpl implements ExchangeCurrency{
 
     private final String[] currencySymbols = new String[]{"USD", "GBP", "EUR"};
 
     @Override
-    public String convertEGPToForeign(JSONObject currencies) {
+    public String showConversions(JSONObject currencies){
+
         StringBuilder EGPToForeign = new StringBuilder();
         for (String currency : currencySymbols) {
             EGPToForeign
@@ -18,11 +24,6 @@ public class ExchangeCurrencyImpl implements ExchangeCurrency{
                     .append(" ");
         }
 
-        return EGPToForeign.toString();
-    }
-
-    @Override
-    public String convertForeignToEGP(JSONObject currencies){
         StringBuilder ForeignToEGP = new StringBuilder();
         for (String currency : currencySymbols) {
             ForeignToEGP
@@ -33,6 +34,6 @@ public class ExchangeCurrencyImpl implements ExchangeCurrency{
                     .append(" ");
         }
 
-        return ForeignToEGP.toString();
+        return EGPToForeign.toString() + "\n" + ForeignToEGP.toString();
     }
 }

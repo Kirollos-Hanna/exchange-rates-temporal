@@ -21,18 +21,8 @@ public class InitiateExchangeRates {
         // WorkflowStubs enable calls to methods as if the Workflow object is local, but actually perform an RPC.
         ExchangeRateWorkFlow workflow = client.newWorkflowStub(ExchangeRateWorkFlow.class, options);
 
-        JsonNode responseObj = Unirest
-                .get("https://v6.exchangerate-api.com/v6/a5349596abec82d57d9b2c11/latest/EGP")
-                .asJson()
-                .getBody();
-
-        String stringJson = responseObj.toString();
-        JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject) parser.parse(stringJson);
-
-        JSONObject ConversionRates = (JSONObject) json.get("conversion_rates");
         // Synchronously execute the Workflow and wait for the response.
-        String RatesToAndFromEGP = workflow.getExchangeRates(ConversionRates);
+        String RatesToAndFromEGP = workflow.getExchangeRates();
         System.out.println(RatesToAndFromEGP);
         System.exit(0);
     }
