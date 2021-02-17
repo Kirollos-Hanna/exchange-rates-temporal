@@ -21,8 +21,7 @@ public class ExchangeRatesWorker {
         // Workflows are stateful, so you need to supply a type to create instances.
         worker.registerWorkflowImplementationTypes(ExchangeRateWorkFlowImpl.class);
         // Activities are stateless and thread safe, so a shared instance is used.
-        worker.registerActivitiesImplementations(new ExchangeCurrencyImpl());
-        worker.registerActivitiesImplementations(new CurrencyAPICallImpl());
+        worker.registerActivitiesImplementations(new ExchangeCurrencyImpl(), new CurrencyAPICallImpl());
         // Start polling the Task Queue.
         factory.start();
     }
