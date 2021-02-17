@@ -4,26 +4,35 @@ import org.json.simple.JSONObject;
 
 public class ExchangeCurrencyImpl implements ExchangeCurrency{
 
+    private final String[] currencySymbols = new String[]{"USD", "GBP", "EUR"};
+
     @Override
     public String convertEGPToForeign(JSONObject currencies) {
-        double GBPVal = (double) currencies.get("GBP");
-        double USDVal = (double) currencies.get("USD");
-        double EURVal = (double) currencies.get("EUR");
+        StringBuilder EGPToForeign = new StringBuilder();
+        for (String currency : currencySymbols) {
+            EGPToForeign
+                    .append("EGP to ")
+                    .append(currency)
+                    .append(": ")
+                    .append(String.format("%.3f", (double) currencies.get(currency)))
+                    .append(" ");
+        }
 
-        return "EGP to USD: " + String.format("%.3f", USDVal)
-                + " EGP to GBP: " + String.format("%.3f", GBPVal)
-                + " EGP to EUR: " + String.format("%.3f", EURVal);
+        return EGPToForeign.toString();
     }
 
     @Override
     public String convertForeignToEGP(JSONObject currencies){
-//        int EGPVal = (int) currencies.get("EGP");
-        double GBPVal = 1 / (double) currencies.get("GBP");
-        double USDVal = 1 / (double) currencies.get("USD");
-        double EURVal = 1 / (double) currencies.get("EUR");
+        StringBuilder ForeignToEGP = new StringBuilder();
+        for (String currency : currencySymbols) {
+            ForeignToEGP
+                    .append(currency)
+                    .append(" to EGP")
+                    .append(": ")
+                    .append(String.format("%.3f", 1 / (double) currencies.get(currency)))
+                    .append(" ");
+        }
 
-        return "USD to EGP: " + String.format("%.3f", USDVal)
-                + " GBP to EGP: " + String.format("%.3f", GBPVal)
-                + " EUR to EGP: " + String.format("%.3f", EURVal);
+        return ForeignToEGP.toString();
     }
 }
