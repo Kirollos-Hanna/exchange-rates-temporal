@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutionException;
 
 public class VertxServer extends AbstractVerticle {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         Vertx vertx = Vertx.vertx();
         HttpServer server = vertx.createHttpServer();
         Router router = Router.router(vertx);
