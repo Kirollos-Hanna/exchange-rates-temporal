@@ -1,6 +1,7 @@
 package exchangerateapp;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
+import io.temporal.client.ActivityCompletionClient;
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
 import io.temporal.worker.Worker;
@@ -21,7 +22,8 @@ public class ExchangeRatesWorker {
         // Workflows are stateful, so you need to supply a type to create instances.
         worker.registerWorkflowImplementationTypes(ExchangeRateWorkFlowImpl.class);
         // Activities are stateless and thread safe, so a shared instance is used.
-        worker.registerActivitiesImplementations(new ExchangeCurrencyImpl(), new CurrencyAPICallImpl());
+        ActivityCompletionClient completionClient = client.newActivityCompletionClient();
+        worker.registerActivitiesImplementations(new ExchangeCurrencyImpl(completionClient), new CurrencyAPICallImpl(completionClient));
         // Start polling the Task Queue.
         factory.start();
     }

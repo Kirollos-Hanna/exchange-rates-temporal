@@ -1,10 +1,10 @@
 package exchangerateapp;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
 import io.temporal.activity.ActivityOptions;
+import io.temporal.workflow.Async;
+import io.temporal.workflow.Promise;
 import io.temporal.workflow.Workflow;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 
 import java.time.Duration;
 
@@ -19,7 +19,7 @@ public class ExchangeRateWorkFlowImpl implements ExchangeRateWorkFlow{
     private final CurrencyAPICall currencyAPICall = Workflow.newActivityStub(CurrencyAPICall.class, options);
 
     @Override
-    public String getExchangeRates() throws ParseException, UnirestException {
+    public String getExchangeRates() {
         // This is the entry point to the Workflow.
         // If there were other Activity methods they would be orchestrated here or from within other Activities.
         JSONObject currencies = currencyAPICall.GetCurrencyConversions();

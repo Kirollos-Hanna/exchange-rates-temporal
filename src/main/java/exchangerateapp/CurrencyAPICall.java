@@ -9,5 +9,5 @@ import org.json.simple.parser.ParseException;
 @ActivityInterface
 public interface CurrencyAPICall {
     @ActivityMethod
-    JSONObject GetCurrencyConversions() throws UnirestException, ParseException;
+    JSONObject GetCurrencyConversions();
 }

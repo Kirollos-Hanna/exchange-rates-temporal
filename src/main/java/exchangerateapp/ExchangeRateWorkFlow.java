@@ -10,5 +10,5 @@ import org.json.simple.parser.ParseException;
 public interface ExchangeRateWorkFlow {
 
     @WorkflowMethod
-    String getExchangeRates() throws ParseException, UnirestException;
+    String getExchangeRates();
 }
